@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chord Inversions Game</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Chord Inversions</h1>
+    <p id="status">Connect a MIDI keyboard (or use the on-screen keys) and play the requested inversion.</p>
+
+    <section id="controls" class="row">
+      <div class="card" style="flex:0 0 220px;text-align:left">
+        <h3>Chord types</h3>
+        <div class="col">
+          <label><input type="checkbox" id="ct-major" checked> Major</label>
+          <label><input type="checkbox" id="ct-minor" checked> Minor</label>
+          <label><input type="checkbox" id="ct-dim" checked> Diminished</label>
+          <div style="margin-top:8px">
+            <label><input type="radio" name="note-mode" id="mode-auto" value="auto" checked> Auto</label>
+            <label><input type="radio" name="note-mode" id="mode-2" value="2"> 2-note</label>
+            <label><input type="radio" name="note-mode" id="mode-3" value="3"> 3-note</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="flex:0 0 180px;text-align:left">
+        <h3>Inversions</h3>
+        <div class="col">
+          <label><input type="checkbox" id="inv-root" checked> Root</label>
+          <label><input type="checkbox" id="inv-1" checked> 1st</label>
+          <label><input type="checkbox" id="inv-2" checked> 2nd</label>
+        </div>
+      </div>
+
+      <div class="card" style="flex:1;text-align:left">
+        <h3>Game</h3>
+        <div class="row">
+          <button id="startGame">Start Game</button>
+          <button id="stopGame">Stop</button>
+          <div id="lives">Lives: 3</div>
+          <div id="score">Score: 0</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="game" class="card">
+      <div class="row">
+        <div>
+          <h2>Target</h2>
+          <div id="target">—</div>
+        </div>
+        <div>
+          <h2>Request</h2>
+          <div id="request">—</div>
+        </div>
+        <div style="margin-left:auto">
+          <button id="next">New chord</button>
+          <button id="hint">Show notes</button>
+        </div>
+      </div>
+
+      <div id="feedback"></div>
+      <div id="remaining" style="margin-top:8px;font-weight:700">Invaders: 0</div>
+
+      <canvas id="gameCanvas" width="700" height="300" style="background:#021028;border-radius:8px;display:block;margin-top:12px"></canvas>
+
+      <h3>On-screen keyboard</h3>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <button id="oct-down">◀ Octave</button>
+        <div id="keyboard-octave" style="min-width:80px;text-align:center">C3</div>
+        <button id="oct-up">Octave ▶</button>
+        <button id="center-keyboard">Center keyboard</button>
+        <button id="keys-less" style="margin-left:8px">- Keys</button>
+        <button id="keys-more">+ Keys</button>
+        <div style="margin-left:auto">Displayed octaves: <span id="keys-count">3</span></div>
+      </div>
+      <div id="keyboard-wrap" style="overflow-x:auto;"> 
+        <div id="keyboard" style="display:inline-flex"></div>
+      </div>
+
+      <footer>
+        <p>Built with Web MIDI API. Localhost is required for MIDI in most browsers.</p>
+      </footer>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
