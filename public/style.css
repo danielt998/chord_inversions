@@ -1,6 +1,24 @@
 *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
 body{margin:0;background:#0f172a;color:#e6eef8;display:flex;min-height:100vh;align-items:center;justify-content:center}
 main{width:900px;max-width:95%;padding:24px}
+
+/* Responsive tweaks for small screens */
+@media (max-width: 600px){
+  main{padding:12px}
+  .row{flex-direction:column;align-items:stretch}
+  .card{width:100%;text-align:left}
+  #keyboard-wrap{overflow-x:auto}
+  #keyboard{display:flex;gap:6px}
+  .key{width:40px;height:140px;border-radius:6px}
+  .key.black{width:26px;height:90px;margin-left:-14px;margin-right:-14px}
+  button{padding:12px 14px;font-size:16px}
+  #keyboard .note-label{font-size:12px}
+  #gameCanvas{width:100%;height:auto}
+}
+
+/* Improve touch target generally */
+.key{touch-action:manipulation}
+
 h1{margin:0 0 12px}
 .row{display:flex;gap:16px;align-items:center;margin:12px 0}
 .card{background:#071233;padding:16px;border-radius:8px;flex:1;text-align:center}

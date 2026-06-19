@@ -440,6 +440,27 @@ function centerKeyboard(){
 
 // Runner Game engine
 let trackLength = 100; // units to finish
+
+// Responsive canvas resizing for mobile
+function resizeCanvas(){
+  if(!els.canvas) return;
+  // set logical size to element size so drawing scales crisply
+  const rect = els.canvas.getBoundingClientRect();
+  // respect device pixel ratio
+  const dpr = window.devicePixelRatio || 1;
+  const w = Math.max(300, Math.floor(rect.width * dpr));
+  const h = Math.max(160, Math.floor(rect.height * dpr || rect.width * 0.45 * dpr));
+  if(els.canvas.width !== w || els.canvas.height !== h){
+    els.canvas.width = w;
+    els.canvas.height = h;
+    // scale drawing context for DPR
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+}
+
+window.addEventListener('resize', ()=>{ resizeCanvas(); draw(); });
+window.addEventListener('orientationchange', ()=>{ setTimeout(()=>{ resizeCanvas(); draw(); }, 300); });
+
 let runnerPos = 0; // 0..trackLength
 let stepPerHit = 20; // advance per correct hit
 
@@ -542,6 +563,8 @@ if(octUpBtn) octUpBtn.addEventListener('click', ()=>shiftKeyboard(1));
 if(octDownBtn) octDownBtn.addEventListener('click', ()=>shiftKeyboard(-1));
 if(centerBtn) centerBtn.addEventListener('click', ()=>centerKeyboard());
 
+// make canvas responsive for phones
+resizeCanvas();
 // show initial track and target
 spawnTrack(100);
 draw();
