@@ -563,6 +563,36 @@ if(octUpBtn) octUpBtn.addEventListener('click', ()=>shiftKeyboard(1));
 if(octDownBtn) octDownBtn.addEventListener('click', ()=>shiftKeyboard(-1));
 if(centerBtn) centerBtn.addEventListener('click', ()=>centerKeyboard());
 
+// Mobile settings modal: move controls into modal when opened so mobile view focuses on game+keyboard
+const mobileSettingsBtn = document.getElementById('mobile-settings-btn');
+const mobileModal = document.getElementById('mobile-settings-modal');
+const mobileContainer = document.getElementById('mobile-settings-container');
+const mobileClose = document.getElementById('mobile-settings-close');
+const controlsEl = document.getElementById('controls');
+let controlsPlaceholder = null;
+function openMobileSettings(){
+  if(!controlsEl || !mobileContainer) return;
+  // insert placeholder to restore location later
+  controlsPlaceholder = document.createElement('div');
+  controlsPlaceholder.id = 'controls-placeholder';
+  controlsEl.parentElement.insertBefore(controlsPlaceholder, controlsEl);
+  // move controls into modal container
+  mobileContainer.appendChild(controlsEl);
+  mobileModal.setAttribute('aria-hidden', 'false');
+}
+function closeMobileSettings(){
+  if(!controlsPlaceholder) return;
+  // move controls back
+  controlsPlaceholder.parentElement.insertBefore(controlsEl, controlsPlaceholder);
+  controlsPlaceholder.remove();
+  controlsPlaceholder = null;
+  mobileModal.setAttribute('aria-hidden', 'true');
+}
+if(mobileSettingsBtn) mobileSettingsBtn.addEventListener('click', openMobileSettings);
+if(mobileClose) mobileClose.addEventListener('click', closeMobileSettings);
+// close modal on backdrop click
+if(mobileModal) mobileModal.addEventListener('click', (ev)=>{ if(ev.target === mobileModal) closeMobileSettings(); });
+
 // make canvas responsive for phones
 resizeCanvas();
 // show initial track and target

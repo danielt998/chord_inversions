@@ -14,7 +14,15 @@ main{width:900px;max-width:95%;padding:24px}
   button{padding:12px 14px;font-size:16px}
   #keyboard .note-label{font-size:12px}
   #gameCanvas{width:100%;height:auto}
+  /* hide full controls block on mobile; accessible via settings button */
+  #controls{display:none}
+  #mobile-settings-btn{display:block}
 }
+
+/* Modal specific for small screens */
+#mobile-settings-modal{display:none}
+#mobile-settings-modal[aria-hidden="false"]{display:flex}
+
 
 /* Improve touch target generally */
 .key{touch-action:manipulation}
