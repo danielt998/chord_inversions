@@ -102,9 +102,33 @@ function loadPrefs(){
   }catch(e){ console.warn('Could not load prefs', e); }
 }
 
+function targetIsIncluded(tgt){
+  if(!tgt) return false;
+  // chord type allowed?
+  const types = enabledChordTypes();
+  if(!types.some(tt => tt.id === (tgt.type && tgt.type.id))) return false;
+  // inversion allowed? if user selected inversions, require match
+  const invs = enabledInversions();
+  if(invs.length > 0 && !invs.includes(tgt.inversion)) return false;
+  // note mode compatibility
+  const mode = getNoteMode();
+  if(mode === '2' && tgt.notes.length !== 2) return false;
+  if(mode === '3' && tgt.notes.length !== 3) return false;
+  return true;
+}
+
+function ensureTargetStillValid(){
+  if(!target) return;
+  if(!targetIsIncluded(target)){
+    els.feedback.textContent = 'Target changed to match new settings';
+    els.feedback.style.color = '#93c5fd';
+    newRound();
+  }
+}
+
 function bindPrefListeners(){
   const elems = [els.ctMajor, els.ctMinor, els.ctDim, els.invRoot, els.inv1, els.inv2, els.modeAuto, els.mode2, els.mode3];
-  elems.forEach(el => { if(el) el.addEventListener('change', ()=>{ savePrefs(); }); });
+  elems.forEach(el => { if(el) el.addEventListener('change', ()=>{ savePrefs(); ensureTargetStillValid(); }); });
   const km = document.getElementById('keys-more');
   const kl = document.getElementById('keys-less');
   if(km) km.addEventListener('click', ()=>{ changeKeyboardOctaves(1); savePrefs(); });
