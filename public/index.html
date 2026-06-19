@@ -12,7 +12,7 @@
     <h1>Chord Inversions</h1>
     <p id="status">Connect a MIDI keyboard (or use the on-screen keys) and play the requested inversion.</p>
 
-    <button id="mobile-settings-btn" aria-label="Settings" title="Settings" style="display:none;position:fixed;right:14px;bottom:14px;z-index:60;border-radius:50%;width:56px;height:56px;font-size:20px">⚙️</button>
+    <button id="mobile-settings-btn" aria-label="Settings" title="Settings" style="position:fixed;right:14px;bottom:14px;z-index:60;border-radius:50%;width:56px;height:56px;font-size:20px">⚙️</button>
 
     <section id="controls" class="row">
       <div class="card" style="flex:0 0 220px;text-align:left">
@@ -50,7 +50,7 @@
     </section>
 
     <!-- Mobile settings modal (hidden by default) -->
-    <div id="mobile-settings-modal" aria-hidden="true" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:50;align-items:flex-start;padding:20px;overflow:auto">
+    <div id="mobile-settings-modal" aria-hidden="true" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:50;align-items:flex-start;padding:20px;overflow:auto">
       <div style="background:#071233;padding:16px;border-radius:8px;max-width:720px;width:100%;margin:40px auto;position:relative">
         <button id="mobile-settings-close" style="position:absolute;right:12px;top:12px">Close</button>
         <div id="mobile-settings-container"></div>
