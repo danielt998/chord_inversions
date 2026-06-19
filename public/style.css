@@ -4,19 +4,35 @@ main{width:900px;max-width:95%;padding:24px}
 
 /* Responsive tweaks for small screens */
 @media (max-width: 600px){
-  main{padding:12px}
+  main{padding:8px}
+  h1{font-size:18px;margin-bottom:8px}
+  #status{font-size:12px}
   .row{flex-direction:column;align-items:stretch}
-  .card{width:100%;text-align:left}
+  .card{width:100%;text-align:left;padding:10px;border-radius:8px}
   #keyboard-wrap{overflow-x:auto}
-  #keyboard{display:flex;gap:6px}
-  .key{width:40px;height:140px;border-radius:6px}
-  .key.black{width:26px;height:90px;margin-left:-14px;margin-right:-14px}
-  button{padding:12px 14px;font-size:16px}
-  #keyboard .note-label{font-size:12px}
-  #gameCanvas{width:100%;height:auto}
+  /* make keyboard fill width and keys touch-friendly but compact */
+  #keyboard{display:flex;gap:4px}
+  .key{width:36px;height:110px;border-radius:6px;font-size:12px}
+  .key.black{width:22px;height:72px;margin-left:-12px;margin-right:-12px}
+  button{padding:10px 12px;font-size:15px}
+  #keyboard .note-label{font-size:11px}
+  /* smaller canvas height on mobile */
+  #gameCanvas{width:100%;height:160px}
   /* hide full controls block on mobile; accessible via settings button */
   #controls{display:none}
   #mobile-settings-btn{display:block}
+  /* compact the target/request/feedback area */
+  #target,#request{font-size:1rem}
+  #feedback{height:22px;font-size:13px}
+  #remaining{font-size:13px}
+}
+
+/* In landscape phones, stack game above keyboard to maximize horizontal space */
+@media (max-width: 600px) and (orientation: landscape){
+  main{padding:6px}
+  #game{order:1}
+  #keyboard-wrap{order:2;margin-top:8px}
+  #gameCanvas{height:200px}
 }
 
 /* Modal specific for small screens */
